@@ -73,8 +73,8 @@ public class KeyStoreService {
         String subjectDN = certificate.getSubjectX500Principal().getName();
         String cn = subjectDN.replaceAll(Constants.CN_PATTERN, Constants.GROUP_ONE);
 
-        // Obtém o Número de Série do certificado
-        String serialNumber = certificate.getSerialNumber().toString();
+        // Obtém o Número de Série do certificado e o converte para Hexadecimal
+        String serialNumber = certificate.getSerialNumber().toString(16);
 
         // Formata as informações para serem retornadas na lista
         return String.format("alias: %s, cn: %s, numero de serie: %s", alias, cn, serialNumber);

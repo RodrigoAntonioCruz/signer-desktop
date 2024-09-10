@@ -1,0 +1,55 @@
+<configuration>
+    <springProperty scope="" name="LEVEL" source="logging.level.root" defaultValue="info"/>
+    <springProperty scope="" name="TIMEZONE" source="logging.timezone" defaultValue="GMT-3"/>
+    <property name="dateTimePattern" value="yyyy-MM-dd'T'HH:mm:ss.SSSZ" />
+    <property name="logPattern" value="%d{${dateTimePattern}, ${TIMEZONE}} %-4r [%t] %5p %c{1} - %m - traceId=%X{traceId}%n"/>
+
+    <springProfile name="local">
+        <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%d{${dateTimePattern}, ${TIMEZONE}} %-5level %logger{36} - %msg%n</pattern>
+            </layout>
+        </appender>
+    </springProfile>
+
+    <springProfile name="dev | qa | stg | prod">
+        <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+                <providers>
+                    <timestamp>
+                        <timeZone>${TIMEZONE}</timeZone>
+                    </timestamp>
+                    <loggerName>
+                        <fieldName>logger</fieldName>
+                    </loggerName>
+                    <logLevel>
+                        <fieldName>level</fieldName>
+                    </logLevel>
+                    <threadName/>
+                    <mdc/>
+                    <arguments>
+                        <includeNonStructuredArguments>false</includeNonStructuredArguments>
+                    </arguments>
+                    <stackTrace/>
+                    <message/>
+                </providers>
+            </encoder>
+        </appender>
+
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>logs/app-log.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>logs/app-log.%d{yyyy-MM-dd}.log</fileNamePattern>
+                <maxHistory>30</maxHistory>
+            </rollingPolicy>
+            <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                <pattern>${logPattern}</pattern>
+            </encoder>
+        </appender>
+    </springProfile>
+
+    <root level="${LEVEL}">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="FILE" />
+    </root>
+</configuration>

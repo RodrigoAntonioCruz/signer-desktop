@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import javax.xml.XMLConstants;
 import javax.xml.crypto.MarshalException;
 import javax.xml.crypto.dsig.CanonicalizationMethod;
 import javax.xml.crypto.dsig.DigestMethod;
@@ -147,6 +148,8 @@ public class XMLSignerService {
 
     private void saveDocumentToFile(Document document, Path signedFilePath) throws TransformerConfigurationException {
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        disableAccessExternalEntities(transformerFactory);
+
         Transformer transformer = transformerFactory.newTransformer();
         try (FileOutputStream outputStream = new FileOutputStream(signedFilePath.toFile())) {
             transformer.transform(new DOMSource(document), new StreamResult(outputStream));
@@ -169,5 +172,11 @@ public class XMLSignerService {
         dbFactory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
         dbFactory.setFeature("http://javax.xml.XMLConstants/feature/secure-processing", true);
         dbFactory.setNamespaceAware(true);
+    }
+
+    private void disableAccessExternalEntities(TransformerFactory transformerFactory) throws TransformerConfigurationException {
+        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+        transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+        transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
     }
 }

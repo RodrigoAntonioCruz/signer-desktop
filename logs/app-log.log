@@ -1,0 +1,601 @@
+2024-09-10T08:40:03.430-0300 875  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 10092 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T08:40:03.438-0300 883  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T08:40:04.818-0300 2263 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T08:40:04.890-0300 2335 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6dcc40f5:0/SimpleConnection@6e3ecf5c [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=59791] - traceId=
+2024-09-10T08:40:04.900-0300 2345 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T08:40:04.900-0300 2345 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T08:40:04.952-0300 2397 [main]  INFO c.s.SignerApplication - Started SignerApplication in 2.222 seconds (process running for 2.628) - traceId=
+2024-09-10T08:41:34.800-0300 92245 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241252 - traceId=
+2024-09-10T08:41:34.810-0300 92255 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T08:41:34.812-0300 92257 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  WARN o.d.s.c.k.l.c.Configuration - Nenhum driver encontrado - traceId=
+2024-09-10T08:41:35.447-0300 92892 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:32)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:122)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:77)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:69)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T08:41:35.448-0300 92893 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241252.signed.p7s - traceId=
+2024-09-10T08:42:56.261-0300 173706 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241252 - traceId=
+2024-09-10T08:42:56.263-0300 173708 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T08:42:56.728-0300 174173 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:32)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:122)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:77)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:69)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T08:42:56.730-0300 174175 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241252.signed.p7s - traceId=
+2024-09-10T08:44:02.549-0300 239994 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241252 - traceId=
+2024-09-10T08:44:02.549-0300 239994 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T08:44:02.896-0300 240341 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:32)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:122)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:77)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:69)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T08:44:02.897-0300 240342 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241252.signed.p7s - traceId=
+2024-09-10T08:44:06.922-0300 244367 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241252 - traceId=
+2024-09-10T08:44:06.923-0300 244368 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T08:44:07.275-0300 244720 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:32)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:122)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:77)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:69)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T08:44:07.275-0300 244720 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241252.signed.p7s - traceId=
+2024-09-10T08:45:27.934-0300 325379 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241252 - traceId=
+2024-09-10T08:45:27.934-0300 325379 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 - traceId=
+2024-09-10T08:45:28.308-0300 325753 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:32)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:122)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:77)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:69)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T08:45:28.308-0300 325753 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241252.signed.p7s - traceId=
+2024-09-10T08:46:14.868-0300 372313 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T08:46:15.787-0300 373232 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
+2024-09-10T08:50:36.718-0300 776  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 3856 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T08:50:36.725-0300 783  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T08:50:37.940-0300 1998 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T08:50:38.008-0300 2066 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6dcc40f5:0/SimpleConnection@6e3ecf5c [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=60158] - traceId=
+2024-09-10T08:50:38.018-0300 2076 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T08:50:38.019-0300 2077 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T08:50:38.084-0300 2142 [main]  INFO c.s.SignerApplication - Started SignerApplication in 1.978 seconds (process running for 2.345) - traceId=
+2024-09-10T08:52:09.368-0300 93426 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241260 - traceId=
+2024-09-10T08:52:09.379-0300 93437 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T08:52:09.381-0300 93439 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  WARN o.d.s.c.k.l.c.Configuration - Nenhum driver encontrado - traceId=
+2024-09-10T08:52:10.986-0300 95044 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:32)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:122)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:77)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:69)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T08:52:10.987-0300 95045 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241260.signed.p7s - traceId=
+2024-09-10T09:13:11.116-0300 1355174 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T09:13:11.724-0300 1355782 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
+2024-09-10T09:13:16.390-0300 817  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 12540 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T09:13:16.398-0300 825  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T09:13:17.586-0300 2013 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T09:13:17.667-0300 2094 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6dcc40f5:0/SimpleConnection@6e3ecf5c [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=60809] - traceId=
+2024-09-10T09:13:17.681-0300 2108 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:13:17.681-0300 2108 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:13:17.751-0300 2178 [main]  INFO c.s.SignerApplication - Started SignerApplication in 2.003 seconds (process running for 2.396) - traceId=
+2024-09-10T09:13:44.769-0300 29196 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241260 - traceId=
+2024-09-10T09:13:44.779-0300 29206 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T09:13:44.781-0300 29208 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  WARN o.d.s.c.k.l.c.Configuration - Nenhum driver encontrado - traceId=
+2024-09-10T09:13:46.440-0300 30867 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:34)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:123)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:78)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:70)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T09:13:46.441-0300 30868 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241260.signed.p7s - traceId=
+2024-09-10T09:18:41.058-0300 325485 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T09:18:41.356-0300 325783 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
+2024-09-10T09:18:46.817-0300 786  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 8608 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T09:18:46.826-0300 795  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T09:18:47.976-0300 1945 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T09:18:48.030-0300 1999 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6dcc40f5:0/SimpleConnection@6e3ecf5c [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=60973] - traceId=
+2024-09-10T09:18:48.039-0300 2008 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:18:48.039-0300 2008 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:18:48.099-0300 2068 [main]  INFO c.s.SignerApplication - Started SignerApplication in 1.903 seconds (process running for 2.274) - traceId=
+2024-09-10T09:18:57.629-0300 11598 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241260 - traceId=
+2024-09-10T09:18:57.638-0300 11607 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T09:18:57.641-0300 11610 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  WARN o.d.s.c.k.l.c.Configuration - Nenhum driver encontrado - traceId=
+2024-09-10T09:18:59.209-0300 13178 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:32)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:123)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:78)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:70)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T09:18:59.211-0300 13180 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241260.signed.p7s - traceId=
+2024-09-10T09:21:41.157-0300 175126 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T09:21:41.913-0300 175882 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
+2024-09-10T09:21:43.812-0300 891  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 6204 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T09:21:43.820-0300 899  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T09:21:44.996-0300 2075 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T09:21:45.064-0300 2143 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6dcc40f5:0/SimpleConnection@6e3ecf5c [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=61073] - traceId=
+2024-09-10T09:21:45.072-0300 2151 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:21:45.072-0300 2151 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:21:45.137-0300 2216 [main]  INFO c.s.SignerApplication - Started SignerApplication in 1.971 seconds (process running for 2.444) - traceId=
+2024-09-10T09:22:41.277-0300 58356 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T09:22:41.653-0300 58732 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
+2024-09-10T09:22:43.456-0300 857  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 23984 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T09:22:43.464-0300 865  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T09:22:44.657-0300 2058 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T09:22:44.715-0300 2116 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6dcc40f5:0/SimpleConnection@6e3ecf5c [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=61106] - traceId=
+2024-09-10T09:22:44.724-0300 2125 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:22:44.724-0300 2125 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:22:44.787-0300 2188 [main]  INFO c.s.SignerApplication - Started SignerApplication in 1.943 seconds (process running for 2.4) - traceId=
+2024-09-10T09:23:06.374-0300 23775 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241260 - traceId=
+2024-09-10T09:23:06.383-0300 23784 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T09:23:06.385-0300 23786 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  WARN o.d.s.c.k.l.c.Configuration - Nenhum driver encontrado - traceId=
+2024-09-10T09:23:08.014-0300 25415 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:32)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:123)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:78)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:70)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T09:23:08.016-0300 25417 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241260.signed.p7s - traceId=
+2024-09-10T09:24:34.240-0300 111641 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T09:24:34.843-0300 112244 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
+2024-09-10T09:24:36.714-0300 840  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 16012 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T09:24:36.721-0300 847  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T09:24:37.878-0300 2004 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T09:24:37.940-0300 2066 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#6dcc40f5:0/SimpleConnection@6e3ecf5c [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=61169] - traceId=
+2024-09-10T09:24:37.949-0300 2075 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:24:37.950-0300 2076 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:24:38.007-0300 2133 [main]  INFO c.s.SignerApplication - Started SignerApplication in 1.896 seconds (process running for 2.337) - traceId=
+2024-09-10T09:24:46.478-0300 10604 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241260 - traceId=
+2024-09-10T09:24:46.488-0300 10614 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T09:24:46.490-0300 10616 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  WARN o.d.s.c.k.l.c.Configuration - Nenhum driver encontrado - traceId=
+2024-09-10T09:24:48.128-0300 12254 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1] ERROR c.s.s.SignProcessService - Erro ao processar mensagem - traceId=
+java.lang.reflect.InaccessibleObjectException: Unable to make field private java.security.KeyStoreSpi java.security.KeyStore.keyStoreSpi accessible: module java.base does not "opens java.security" to unnamed module @3d8314f0
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:354)
+	at java.base/java.lang.reflect.AccessibleObject.checkCanSetAccessible(AccessibleObject.java:297)
+	at java.base/java.lang.reflect.Field.checkCanSetAccessible(Field.java:178)
+	at java.base/java.lang.reflect.Field.setAccessible(Field.java:172)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.fixAliases(MSKeyStoreLoader.java:138)
+	at org.demoiselle.signer.core.keystore.loader.implementation.MSKeyStoreLoader.getKeyStore(MSKeyStoreLoader.java:85)
+	at com.signer.service.KeyStoreService.initializeKeyStore(KeyStoreService.java:32)
+	at com.signer.service.XMLSignerService.initializeKeyStore(XMLSignerService.java:123)
+	at com.signer.service.XMLSignerService.signXMLDocument(XMLSignerService.java:78)
+	at com.signer.service.XMLSignerService.signXML(XMLSignerService.java:70)
+	at com.signer.service.SignProcessService.xmlResolver(SignProcessService.java:96)
+	at com.signer.service.SignProcessService.receiveMessage(SignProcessService.java:63)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.doInvoke(InvocableHandlerMethod.java:169)
+	at org.springframework.amqp.rabbit.listener.adapter.KotlinAwareInvocableHandlerMethod.doInvoke(KotlinAwareInvocableHandlerMethod.java:45)
+	at org.springframework.messaging.handler.invocation.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:119)
+	at org.springframework.amqp.rabbit.listener.adapter.HandlerAdapter.invoke(HandlerAdapter.java:75)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandler(MessagingMessageListenerAdapter.java:278)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.invokeHandlerAndProcessResult(MessagingMessageListenerAdapter.java:225)
+	at org.springframework.amqp.rabbit.listener.adapter.MessagingMessageListenerAdapter.onMessage(MessagingMessageListenerAdapter.java:149)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doInvokeListener(AbstractMessageListenerContainer.java:1682)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.actualInvokeListener(AbstractMessageListenerContainer.java:1604)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.invokeListener(AbstractMessageListenerContainer.java:1592)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.doExecuteListener(AbstractMessageListenerContainer.java:1583)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListenerAndHandleException(AbstractMessageListenerContainer.java:1528)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.lambda$executeListener$8(AbstractMessageListenerContainer.java:1506)
+	at io.micrometer.observation.Observation.observe(Observation.java:499)
+	at org.springframework.amqp.rabbit.listener.AbstractMessageListenerContainer.executeListener(AbstractMessageListenerContainer.java:1506)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.doReceiveAndExecute(SimpleMessageListenerContainer.java:1082)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer.receiveAndExecute(SimpleMessageListenerContainer.java:1018)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.mainLoop(SimpleMessageListenerContainer.java:1421)
+	at org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer$AsyncMessageProcessingConsumer.run(SimpleMessageListenerContainer.java:1322)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2024-09-10T09:24:48.130-0300 12256 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241260.signed.p7s - traceId=
+2024-09-10T09:25:24.656-0300 780  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 17392 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T09:25:24.663-0300 787  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T09:25:25.742-0300 1866 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T09:25:25.804-0300 1928 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#70887727:0/SimpleConnection@341b13a8 [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=61202] - traceId=
+2024-09-10T09:25:25.813-0300 1937 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:25:25.814-0300 1938 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:25:25.874-0300 1998 [main]  INFO c.s.SignerApplication - Started SignerApplication in 1.837 seconds (process running for 2.206) - traceId=
+2024-09-10T09:25:26.644-0300 50770 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T09:25:27.283-0300 3407 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T09:25:27.551-0300 51677 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
+2024-09-10T09:25:27.878-0300 4002 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
+2024-09-10T09:25:47.281-0300 796  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 10660 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T09:25:47.289-0300 804  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T09:25:48.432-0300 1947 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T09:25:48.496-0300 2011 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#70887727:0/SimpleConnection@341b13a8 [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=61218] - traceId=
+2024-09-10T09:25:48.505-0300 2020 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:25:48.505-0300 2020 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:25:48.563-0300 2078 [main]  INFO c.s.SignerApplication - Started SignerApplication in 1.894 seconds (process running for 2.318) - traceId=
+2024-09-10T09:25:56.264-0300 9779 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241260 - traceId=
+2024-09-10T09:25:56.274-0300 9789 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T09:25:56.277-0300 9792 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  WARN o.d.s.c.k.l.c.Configuration - Nenhum driver encontrado - traceId=
+2024-09-10T09:25:58.052-0300 11567 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.XMLSignerService - Assinatura XML realizada com sucesso! - traceId=
+2024-09-10T09:25:58.074-0300 11589 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:25:58.433-0300 11948 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:25:58.434-0300 11949 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:25:58.434-0300 11949 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241260.signed.p7s - traceId=
+2024-09-10T09:26:32.586-0300 46101 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T09:26:50.522-0300 803  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 14656 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T09:26:50.529-0300 810  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T09:26:51.660-0300 1941 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T09:26:51.721-0300 2002 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#70887727:0/SimpleConnection@341b13a8 [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=61256] - traceId=
+2024-09-10T09:26:51.732-0300 2013 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:26:51.732-0300 2013 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T09:26:51.796-0300 2077 [main]  INFO c.s.SignerApplication - Started SignerApplication in 1.903 seconds (process running for 2.304) - traceId=
+2024-09-10T09:27:01.770-0300 12051 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241261 - traceId=
+2024-09-10T09:27:01.783-0300 12064 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T09:27:01.786-0300 12067 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  WARN o.d.s.c.k.l.c.Configuration - Nenhum driver encontrado - traceId=
+2024-09-10T09:27:04.578-0300 14859 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.XMLSignerService - Assinatura XML realizada com sucesso! - traceId=
+2024-09-10T09:27:04.593-0300 14874 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:27:05.012-0300 15293 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:27:05.013-0300 15294 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:27:05.013-0300 15294 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241261.signed.p7s - traceId=
+2024-09-10T09:46:25.257-0300 1175538 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241291 - traceId=
+2024-09-10T09:46:25.257-0300 1175538 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T09:46:25.787-0300 1176068 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.XMLSignerService - ssinatura destacada PKCS #7 realizada com sucesso! - traceId=
+2024-09-10T09:46:25.794-0300 1176075 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:46:26.173-0300 1176454 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:46:26.173-0300 1176454 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:46:26.173-0300 1176454 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241291.signed.p7s - traceId=
+2024-09-10T09:48:03.701-0300 1273982 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241261 - traceId=
+2024-09-10T09:48:03.701-0300 1273982 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T09:48:04.087-0300 1274368 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.XMLSignerService - Assinatura XML realizada com sucesso! - traceId=
+2024-09-10T09:48:04.088-0300 1274369 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:48:04.463-0300 1274744 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:48:04.463-0300 1274744 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:48:04.463-0300 1274744 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241261.signed.p7s - traceId=
+2024-09-10T09:48:17.590-0300 1287871 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241261 - traceId=
+2024-09-10T09:48:17.591-0300 1287872 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T09:48:18.366-0300 1288647 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.PDFSignerService - Assinatura PAdES realizada com sucesso! - traceId=
+2024-09-10T09:48:18.386-0300 1288667 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:48:18.761-0300 1289042 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:48:18.761-0300 1289042 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:48:18.761-0300 1289042 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241261.signed.pdf - traceId=
+2024-09-10T09:49:43.247-0300 1373528 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241292 - traceId=
+2024-09-10T09:49:43.247-0300 1373528 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (1) - traceId=
+2024-09-10T09:49:51.247-0300 1381528 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.XMLSignerService - ssinatura destacada PKCS #7 realizada com sucesso! - traceId=
+2024-09-10T09:49:51.253-0300 1381534 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:49:51.713-0300 1381994 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:49:51.713-0300 1381994 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:49:51.714-0300 1381995 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241292.signed.p7s - traceId=
+2024-09-10T09:50:04.012-0300 1394293 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241261 - traceId=
+2024-09-10T09:50:04.013-0300 1394294 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (1) - traceId=
+2024-09-10T09:50:04.600-0300 1394881 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.XMLSignerService - Assinatura XML realizada com sucesso! - traceId=
+2024-09-10T09:50:04.619-0300 1394900 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:50:05.028-0300 1395309 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:50:05.029-0300 1395310 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:50:05.029-0300 1395310 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241261.signed.p7s - traceId=
+2024-09-10T09:50:10.727-0300 1401008 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241261 - traceId=
+2024-09-10T09:50:10.728-0300 1401009 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (1) - traceId=
+2024-09-10T09:50:11.324-0300 1401605 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.PDFSignerService - Assinatura PAdES realizada com sucesso! - traceId=
+2024-09-10T09:50:11.339-0300 1401620 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:50:11.810-0300 1402091 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:50:11.810-0300 1402091 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:50:11.810-0300 1402091 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241261.signed.pdf - traceId=
+2024-09-10T09:52:42.324-0300 1552605 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241261 - traceId=
+2024-09-10T09:52:42.324-0300 1552605 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 - traceId=
+2024-09-10T09:52:48.274-0300 1558555 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.PDFSignerService - Assinatura PAdES realizada com sucesso! - traceId=
+2024-09-10T09:52:48.301-0300 1558582 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:52:48.861-0300 1559142 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:52:48.862-0300 1559143 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:52:48.862-0300 1559143 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241261.signed.pdf - traceId=
+2024-09-10T09:52:50.808-0300 1561089 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241261 - traceId=
+2024-09-10T09:52:50.808-0300 1561089 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 - traceId=
+2024-09-10T09:52:51.638-0300 1561919 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.XMLSignerService - Assinatura XML realizada com sucesso! - traceId=
+2024-09-10T09:52:51.644-0300 1561925 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:52:52.158-0300 1562439 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:52:52.158-0300 1562439 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:52:52.158-0300 1562439 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241261.signed.p7s - traceId=
+2024-09-10T09:52:56.898-0300 1567179 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241294 - traceId=
+2024-09-10T09:52:56.898-0300 1567179 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 - traceId=
+2024-09-10T09:52:57.641-0300 1567922 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.XMLSignerService - ssinatura destacada PKCS #7 realizada com sucesso! - traceId=
+2024-09-10T09:52:57.647-0300 1567928 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T09:52:58.160-0300 1568441 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T09:52:58.160-0300 1568441 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T09:52:58.161-0300 1568442 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241294.signed.p7s - traceId=
+2024-09-10T10:04:46.869-0300 2277150 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T10:04:47.167-0300 2277448 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
+2024-09-10T10:05:07.287-0300 841  [main]  INFO c.s.SignerApplication - Starting SignerApplication using Java 17.0.11 with PID 184 (C:\Users\Rodrigo\Desktop\GitHub\signer-desktop\target\classes started by Rodrigo in C:\Users\Rodrigo\Desktop\GitHub\signer-desktop) - traceId=
+2024-09-10T10:05:07.297-0300 851  [main]  INFO c.s.SignerApplication - The following 1 profile is active: "dev" - traceId=
+2024-09-10T10:05:08.507-0300 2061 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Attempting to connect to: [localhost:5672] - traceId=
+2024-09-10T10:05:08.572-0300 2126 [main]  INFO o.s.a.r.c.CachingConnectionFactory - Created new connection: rabbitConnectionFactory#70887727:0/SimpleConnection@341b13a8 [delegate=amqp://rodrigocruz@127.0.0.1:5672/, localPort=63065] - traceId=
+2024-09-10T10:05:08.583-0300 2137 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (to-sign-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T10:05:08.583-0300 2137 [main]  INFO o.s.a.r.c.RabbitAdmin - Auto-declaring a non-durable, auto-delete, or exclusive Queue (signed-002321) durable:false, auto-delete:false, exclusive:false. It will be redeclared if the broker stops and is restarted while the connection factory is alive, but all messages will be lost. - traceId=
+2024-09-10T10:05:08.647-0300 2201 [main]  INFO c.s.SignerApplication - Started SignerApplication in 2.011 seconds (process running for 2.445) - traceId=
+2024-09-10T10:06:10.452-0300 64006 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Recebido arquivo para assinatura: 20241261 - traceId=
+2024-09-10T10:06:10.462-0300 64016 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Certificado utilizado para a assinatura: RODRIGO ANTONIO DA CRUZ:83164685068 (2) - traceId=
+2024-09-10T10:06:10.462-0300 64016 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  WARN o.d.s.c.k.l.c.Configuration - Nenhum driver encontrado - traceId=
+2024-09-10T10:06:10.685-0300 64239 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.XMLSignerService - Assinatura XML realizada com sucesso! - traceId=
+2024-09-10T10:06:10.703-0300 64257 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Mensagem assinada enviada para a fila. - traceId=
+2024-09-10T10:06:10.743-0300 64297 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Lista de alias de certificados (JSON): ["alias: RODRIGO ANTONIO DA CRUZ:83164685068, cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8184970765657161097","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (4), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 8905517499624970897","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (1), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 6472938201009078791","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (2), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 5287965167409376339","alias: RODRIGO ANTONIO DA CRUZ:83164685068 (3), cn: RODRIGO ANTONIO DA CRUZ:83164685068, numero de serie: 4713665049430110133"] - traceId=
+2024-09-10T10:06:10.743-0300 64297 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo assinado com sucesso! - traceId=
+2024-09-10T10:06:10.743-0300 64297 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-1]  INFO c.s.s.SignProcessService - Arquivo temporário excluído: C:\Users\Rodrigo\20241261.signed.p7s - traceId=
+2024-09-10T10:10:26.462-0300 320016 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Waiting for workers to finish. - traceId=
+2024-09-10T10:10:26.986-0300 320540 [org.springframework.amqp.rabbit.RabbitListenerEndpointContainer#0-2]  INFO o.s.a.r.l.SimpleMessageListenerContainer - Successfully waited for workers to finish. - traceId=
